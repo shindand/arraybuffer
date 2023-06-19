@@ -1,6 +1,5 @@
-class Magician {
-  constructor(power) {
-    this.attack = 100;
+class War {
+  constructor(power, damage) {
     this.power = power;
     this.damage = {
       1: 100,
@@ -8,18 +7,24 @@ class Magician {
       3: 80,
       4: 70,
       5: 60,
-    };
-  }
+    }
 
   get stoned() {
     return this.power;
   }
-  set stoned(square) {
-    this.power = (this.attack / 100) * this.damage[square] -
-      Math.log(square).toFixed(0) * 5;
+  set stoned() {
+    this.power = (this.attack / 100) * this.damage[this.square] -
+      Math.log(this.square).toFixed(0) * 5;
   }
 }
 
-let mag = new Magician();
-mag.stoned = 2;
-console.log(mag.power);
+class Magician extends War{
+  constructor(power, damage, attack, square){
+    super(power, damage);
+    this.attack = attack;
+    this.square = square;
+  }
+}
+
+let mag = new Magician(100, 2);
+console.log(mag.stoned);
